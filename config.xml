@@ -28,12 +28,12 @@ and create a build.properties file for Ant to use to tell it to use that directo
         <hudson.model.StringParameterDefinition>
           <name>WONDER_REPOSITORY</name>
           <description>The Git Repository to fetch Wonder source code from. &lt;b&gt;git://github.com/projectwonder/wonder.git is the default&lt;/b&gt;</description>
-          <defaultValue>git://github.com/projectwonder/wonder.git</defaultValue>
+          <defaultValue>git://github.com/amagavi/wonder.git</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>WONDER_GIT_REFERENCE</name>
           <description>The Git branch tag or remote of Wonder that you want to build. In Git terms it will be &quot;refs/WONDER_GIT_REFERENCE_TYPE/WONDER_GIT_REFERENCE&quot;. &lt;b&gt;master&lt;/b&gt; is the default, but valid options could be &lt;b&gt;*&lt;/b&gt; or &lt;b&gt;MyBranch&lt;/b&gt;</description>
-          <defaultValue>master</defaultValue>
+          <defaultValue>SVN_Trunk_Head</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>BUILD_TARGETS</name>
@@ -66,6 +66,7 @@ and create a build.properties file for Ant to use to tell it to use that directo
             <name>origin/${WONDER_GIT_REFERENCE}</name>
           </hudson.plugins.git.BranchSpec>
         </branches>
+        <disableSubmodules>false</disableSubmodules>
         <recursiveSubmodules>false</recursiveSubmodules>
         <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
         <authorOrCommitter>false</authorOrCommitter>
@@ -77,6 +78,7 @@ and create a build.properties file for Ant to use to tell it to use that directo
         <gitTool>Default</gitTool>
         <submoduleCfg class="list"/>
         <relativeTargetDir>Wonder</relativeTargetDir>
+        <reference></reference>
         <excludedRegions></excludedRegions>
         <excludedUsers></excludedUsers>
         <gitConfigName></gitConfigName>
@@ -90,7 +92,7 @@ and create a build.properties file for Ant to use to tell it to use that directo
           <hudson.plugins.git.UserRemoteConfig>
             <name>origin</name>
             <refspec>+refs/heads/master:refs/remotes/origin/master</refspec>
-            <url>git://github.com/avendasora/WOJenkins.git</url>
+            <url>git://github.com/amagavi/WOJenkins.git</url>
           </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
@@ -98,6 +100,7 @@ and create a build.properties file for Ant to use to tell it to use that directo
             <name>origin/master</name>
           </hudson.plugins.git.BranchSpec>
         </branches>
+        <disableSubmodules>false</disableSubmodules>
         <recursiveSubmodules>false</recursiveSubmodules>
         <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
         <authorOrCommitter>true</authorOrCommitter>
@@ -109,6 +112,7 @@ and create a build.properties file for Ant to use to tell it to use that directo
         <gitTool>Default</gitTool>
         <submoduleCfg class="list"/>
         <relativeTargetDir>WOJenkins</relativeTargetDir>
+        <reference></reference>
         <excludedRegions></excludedRegions>
         <excludedUsers></excludedUsers>
         <gitConfigName></gitConfigName>
