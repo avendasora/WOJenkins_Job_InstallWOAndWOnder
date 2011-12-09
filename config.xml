@@ -32,7 +32,7 @@ and create a build.properties file for Ant to use to tell it to use that directo
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>WONDER_GIT_REFERENCE</name>
-          <description>The Git branch tag or remote of Wonder that you want to build. In Git terms it will be &quot;refs/WONDER_GIT_REFERENCE_TYPE/WONDER_GIT_REFERENCE&quot;. &lt;b&gt;master&lt;/b&gt; is the default, but valid options could be &lt;b&gt;*&lt;/b&gt; or &lt;b&gt;MyBranch&lt;/b&gt;</description>
+          <description>The Git branch of Wonder that you want to build. In Git terms it will be &quot;refs/heads/WONDER_GIT_REFERENCE&quot;. &lt;b&gt;master&lt;/b&gt; is the default, but valid options could be &lt;b&gt;*&lt;/b&gt; or &lt;b&gt;MyBranch&lt;/b&gt;</description>
           <defaultValue>master</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
