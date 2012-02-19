@@ -1,16 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>&lt;p&gt;This job automatically downloads and installs the specified version of Apple WebObjects™ and clones and builds &#xd;
-a specified build target(s) of a specified branch of Project Wonder from a specified Git repository.&#xd;
-&lt;p&gt;&lt;em&gt;It will check to see if each exists already and will not download/build/install if each is already up-to-date.&lt;/em&gt;&#xd;
+  <description>&lt;p&gt;This job automatically prepares a Jenkins build server to be able to build WebObjects projects by cloning the &#xd;
+  WOJenkins build scripts into this job&apos;s &lt;a target=&quot;_new&quot; href=&quot;ws/WOJenkins&quot;&gt;workspace&lt;/a&gt; and then uses them &#xd;
+  to do the following:&lt;/p&gt;&#xd;
+&lt;h3&gt;Apple WebObjects™&lt;/h3&gt;&#xd;
+&lt;ol&gt;&#xd;
+  &lt;li&gt;Downloads &lt;a target=&quot;_new&quot; href=&quot;http://webobjects.mdimension.com/wolips/&quot;&gt;WOInstaller.jar&lt;/a&gt; from MDimension.&lt;/li&gt;&#xd;
+  &lt;li&gt;Downloads WebObjects 5.3.3 or 5.4.3 from Apple&lt;/li&gt;&#xd;
+  &lt;li&gt;Installs WebObjects frameworks in &lt;code&gt;${HUDSON_HOME}/WOFrameworksRepository/WebObjects&lt;/code&gt;&lt;/li&gt;&#xd;
+  &lt;li&gt;Downloads the current &lt;a target=&quot;_new&quot; href=&quot;http://webobjects.mdimension.com/hudson/job/WOLips37Current/lastSuccessfulBuild/artifact/&quot;&gt;&#xd;
+    woproject.jar&lt;/a&gt; from  WOLips build server and installs it in &lt;code&gt;${HUDSON_HOME}/WOFrameworksRepository/WOProject&lt;/code&gt; &#xd;
+    (needed for building any WebObjects application with Ant)&lt;/li&gt;&#xd;
+&lt;/ol&gt;&#xd;
+&lt;h3&gt;Project WOnder&lt;/h3&gt;&#xd;
+&lt;ol&gt;&#xd;
+  &lt;li&gt;Clones/Pulls the Project WOnder Git repository into &lt;code&gt;${HUDSON_HOME}/WOFrameworksRepository/ProjectWOnder/GitRepositoryClone&lt;/code&gt;&#xd;
+    so it can be used by all Wonder builds.&lt;/li&gt;&#xd;
+  &lt;li&gt;Clones/Pulls the specified branch of WOnder into this job&apos;s &lt;a target=&quot;_new&quot; href=&quot;ws/Wonder&quot;&gt;workspace&lt;/a&gt;. &#xd;
+    (By cloning again, multiple jobs can be building different versions of WOnder simultaneously.)&lt;/li&gt;&#xd;
+  &lt;li&gt;Builds and installs WOnder into the ${HUDSON_HOME}/WOFrameworksRepository/ProjectWOnder directory based on the selected BUILD_TARGETS.&lt;/li&gt;&#xd;
+&lt;/ol&gt;&#xd;
 &#xd;
-&lt;p&gt;This job also downloads a shell script from the WOJenkins git repository that will create &#xd;
-a &lt;b&gt;${HUDSON_HOME}/WOFrameworksRepository&lt;/b&gt; directory to install both WebObjects and Project WOnder into&#xd;
-and create a build.properties file for Ant to use to tell it to use that directory.&#xd;
-  &#xd;
-&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; It is intended that you will change both the Wonder Repository and especially the WOJenkins Repository &#xd;
-  &lt;em&gt;(in the job config)&lt;/em&gt; to point to your own clones of each so your build does not change out from under you without warning.</description>
+&lt;h4&gt;NOTE:&lt;/h4&gt;&#xd;
+&lt;p&gt;You should change the repository locations in this Job&apos;s &lt;a target=&quot;_new&quot; href=&quot;configure&quot;&gt;configuration&lt;/a&gt; for both Project WOnder and the WOJenkins to point to your own clones of each. You can run this job as-is, but both Project WOnder and&#xd;
+WOJenkins change regularly and you run the risk of this job breaking if you aren&apos;t using your own repositories.&lt;/p&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
