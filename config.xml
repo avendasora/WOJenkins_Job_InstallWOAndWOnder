@@ -139,7 +139,7 @@ and create a build.properties file for Ant to use to tell it to use that directo
 ${WORKSPACE}/WOJenkins/Build/Wonder/WorkspaceSetupScripts/Git/setupWonderWorkspace.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
-      <targets>${BUILD_TARGETS} -propertyfile ${WORKSPACE}/Root/hudson.build.properties</targets>
+      <targets>${BUILD_TARGETS} -propertyfile ${WORKSPACE}/Root/jenkins.build.properties</targets>
       <buildFile>${WORKSPACE}/Wonder/build.xml</buildFile>
     </hudson.tasks.Ant>
   </builders>
