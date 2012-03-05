@@ -71,7 +71,7 @@ WOJenkins change regularly and you run the risk of this job breaking if you aren
           <hudson.plugins.git.UserRemoteConfig>
             <name>origin</name>
             <refspec>+refs/heads/${WONDER_BRANCH}:refs/remotes/origin/${WONDER_BRANCH}</refspec>
-            <url>git://github.com/amagavi/wonder.git</url>
+            <url>https://github.com/projectwonder/wonder.git</url>
           </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
