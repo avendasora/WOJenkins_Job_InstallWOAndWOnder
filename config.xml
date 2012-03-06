@@ -156,15 +156,6 @@ ${WORKSPACE}/WOJenkins/Build/Wonder/WorkspaceSetupScripts/Git/setupWonderWorkspa
       <buildFile>${WORKSPACE}/Wonder/build.xml</buildFile>
     </hudson.tasks.Ant>
   </builders>
-  <publishers>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>WOProject_Git, WOProject_SVN, WOProject_AllInOne_Git</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
-  </publishers>
+  <publishers/>
   <buildWrappers/>
 </project>
