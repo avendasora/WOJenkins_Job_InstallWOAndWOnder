@@ -31,6 +31,7 @@
 WOJenkins change regularly and you run the risk of this job breaking if you aren&apos;t using your own repositories.&lt;/p&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.plugins.googlecode.GoogleCodeProjectProperty plugin="googlecode@1.7"/>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.ChoiceParameterDefinition>
@@ -63,9 +64,9 @@ WOJenkins change regularly and you run the risk of this job breaking if you aren
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM">
+  <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.3">
     <scms>
-      <hudson.plugins.git.GitSCM>
+      <hudson.plugins.git.GitSCM plugin="git@2.2.7">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -79,33 +80,27 @@ WOJenkins change regularly and you run the risk of this job breaking if you aren
             <name>origin/${WONDER_BRANCH}</name>
           </hudson.plugins.git.BranchSpec>
         </branches>
-        <disableSubmodules>false</disableSubmodules>
-        <recursiveSubmodules>false</recursiveSubmodules>
         <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <authorOrCommitter>false</authorOrCommitter>
-        <clean>false</clean>
-        <wipeOutWorkspace>false</wipeOutWorkspace>
-        <pruneBranches>false</pruneBranches>
-        <remotePoll>false</remotePoll>
-        <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
-        <gitTool>Default</gitTool>
         <submoduleCfg class="list"/>
-        <relativeTargetDir>Wonder</relativeTargetDir>
-        <reference></reference>
-        <excludedRegions></excludedRegions>
-        <excludedUsers></excludedUsers>
-        <gitConfigName></gitConfigName>
-        <gitConfigEmail></gitConfigEmail>
-        <skipTag>false</skipTag>
-        <scmName>Wonder</scmName>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.SubmoduleOption>
+            <disableSubmodules>false</disableSubmodules>
+            <recursiveSubmodules>false</recursiveSubmodules>
+            <trackingSubmodules>false</trackingSubmodules>
+          </hudson.plugins.git.extensions.impl.SubmoduleOption>
+          <hudson.plugins.git.extensions.impl.ScmName>
+            <name>Wonder</name>
+          </hudson.plugins.git.extensions.impl.ScmName>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>Wonder</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM>
+      <hudson.plugins.git.GitSCM plugin="git@2.2.7">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
-            <name>origin</name>
-            <refspec></refspec>
-            <url>git://github.com/avendasora/WOJenkins.git</url>
+            <url>https://github.com/avendasora/WOJenkins.git</url>
           </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
@@ -113,25 +108,13 @@ WOJenkins change regularly and you run the risk of this job breaking if you aren
             <name>**</name>
           </hudson.plugins.git.BranchSpec>
         </branches>
-        <disableSubmodules>false</disableSubmodules>
-        <recursiveSubmodules>false</recursiveSubmodules>
         <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-        <authorOrCommitter>true</authorOrCommitter>
-        <clean>true</clean>
-        <wipeOutWorkspace>false</wipeOutWorkspace>
-        <pruneBranches>true</pruneBranches>
-        <remotePoll>false</remotePoll>
-        <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
-        <gitTool>Default</gitTool>
         <submoduleCfg class="list"/>
-        <relativeTargetDir>WOJenkins</relativeTargetDir>
-        <reference></reference>
-        <excludedRegions></excludedRegions>
-        <excludedUsers></excludedUsers>
-        <gitConfigName></gitConfigName>
-        <gitConfigEmail></gitConfigEmail>
-        <skipTag>false</skipTag>
-        <scmName>WOJenkins</scmName>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>WOJenkins</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        </extensions>
       </hudson.plugins.git.GitSCM>
     </scms>
   </scm>
@@ -139,10 +122,11 @@ WOJenkins change regularly and you run the risk of this job breaking if you aren
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
+  <triggers>
     <hudson.triggers.SCMTrigger>
       <spec># Every Hour, On the Hour.
-0 */1 * * *</spec>
+H */1 * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -151,11 +135,11 @@ WOJenkins change regularly and you run the risk of this job breaking if you aren
       <command>${WORKSPACE}/WOJenkins/Install/WebObjects/installWebObjects.sh
 ${WORKSPACE}/WOJenkins/Build/Wonder/WorkspaceSetupScripts/Git/setupWonderWorkspace.sh</command>
     </hudson.tasks.Shell>
-    <hudson.tasks.Ant>
+    <hudson.tasks.Ant plugin="ant@1.2">
       <targets>${BUILD_TARGETS} -propertyfile ${WORKSPACE}/Root/jenkins.build.properties</targets>
+      <antName>Ant 1.9.4</antName>
       <buildFile>${WORKSPACE}/Wonder/build.xml</buildFile>
     </hudson.tasks.Ant>
   </builders>
-  <publishers/>
   <buildWrappers/>
 </project>
